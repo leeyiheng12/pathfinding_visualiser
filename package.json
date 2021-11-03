@@ -2,7 +2,7 @@
   "name": "maze-online",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://leeyiheng12.github.io/pathfinding_visualiser",
+  "homepage": "http://leeyiheng12.github.io/pathfinding_visualiser",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
