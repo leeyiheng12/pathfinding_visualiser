@@ -1,0 +1,35 @@
+.nodeClass {
+    /* width: 20px;
+    height: 20px; */
+    /* border: 1px solid black; */
+    box-shadow: 5px 5px black;
+    opacity: 0.8;
+}
+
+.openStyle {
+    background-color: white;
+}
+
+.closedStyle {
+    background-color: rgb(255, 166, 0);
+}
+
+.wallStyle {
+    background-color: rgb(61, 60, 60);
+}
+
+.startStyle {
+    background-color: rgb(2, 119, 2);
+}
+
+.endStyle {
+    background-color: rgb(245, 55, 55);
+}
+
+.frontierStyle {
+    background-color: rgb(80, 247, 80);
+}
+
+.pathStyle {
+    background-color: rgb(255, 217, 0);
+}

@@ -1,0 +1,27 @@
+body {
+  font-family: "Architects Daughter", cursive;
+}
+
+.mainDiv {
+  display: flex;
+  /* gap: 10px; */
+  /* border: 1px solid black; */
+  flex-direction: column;
+  gap: 20px;
+}
+
+.topDiv {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-top: 5px;
+}
+
+.section {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* gap: 100px; */
+}

@@ -1,0 +1,26 @@
+.buttonClass {
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    box-shadow: 3px 3px black;
+}
+
+.hidden {
+    /* visibility: hidden; */
+    display: none;
+}
+
+.selected {
+    background-color: rgba(170, 160, 160, 0.801);
+}
+
+.buttonClass:hover {
+    color: white;
+    background-color: rgb(92, 89, 89);
+}
+
+.disabled {
+    color: white;
+}
