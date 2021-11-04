@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Pathfinding Visualiser
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Can be used to visualise some pathfinding and maze related algorithms.
 
-## Available Scripts
+<img src="https://i.imgur.com/fx5WZcS.gif" width="400" height="240" />
 
-In the project directory, you can run:
+Or you can draw your own mazes.
 
-### `yarn start`
+Check it out [hereeeeeeeeeeeeeee](https://leeyiheng12.github.io/pathfinding_visualiser/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Still a work in progress.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+## Available Options
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pathfinding Algorithms
 
-### `yarn build`
+- Breadth-First Search (BFS)
+- Best First Search
+- A* Search
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Maze Generation Algorithms
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Binary Tree
+- "Random Tree" - Binary Tree but at each stage, 1-3 walls can be removed at random
+- Maze - Cellular Automata, rulestring B3/S12345
+- Mazectric - Cellular Automata, rulestring B3/S1234
+- "Another CA" - was experimenting, this would be rulestring B1/S123?
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Other Options
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Dead-End Filling - Try this on your mazes!
+- Different heuristics
+  - Manhattan Distance
+  - Euclidean Distance
+- Diagonal travel
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Motivation
 
-## Learn More
+Pretty fun to watch the squares go.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Similar projects I found: [here](https://clementmihailescu.github.io/Pathfinding-Visualizer/) and [here](http://qiao.github.io/PathFinding.js/visual/).
+Watch some maze generation [here](https://mtimmerm.github.io/webStuff/maze.html).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Useful resources and next steps
 
-### Code Splitting
+[FastPriorityQueue.js](https://github.com/lemire/FastPriorityQueue.js/) - Used this temporarily, might just end up not implementing my own and continue using this.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[Maze Generation Algorithms](https://weblog.jamisbuck.org/2011/2/7/maze-generation-algorithm-recap) - Good explanation of many maze generation algorithms, will definitely try to implement all of them
 
-### Analyzing the Bundle Size
+[Cellular Automata Simulator](https://robinforest.net/post/cellular-automata/) - Good for visualising cellular automata, am planning to create this as well, either together or as a separate project from this.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[Maze Algorithms](http://www.astrolog.org/labyrnth/algrithm.htm) - An insane lot of content, in a perfect world I'll be smart enough to understand everything on that page.
 
-### Making a Progressive Web App
+[mazelib](https://github.com/john-science/mazelib) - Lots of information on mazes and information, am planning to look at their maze-transmuting algorithms. The owner made it super easy to understand as well.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[Red Blob Games](https://www.redblobgames.com/pathfinding/a-star/introduction.html) - Fantastic place to learn about these algorithms with nice visualisations.
 
-### Advanced Configuration
+[Aiding pathfinding with cellular automata](https://realtimecollisiondetection.net/blog/?p=57) - There is information here about simplifying fat mazes (under 'Solving a Fat Maze'), I can't seem to find more information on it online, would be great if anyone can point me to some resources or tell me the keywords to Google.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## Blooper reel
+The importance of not screwing up a priority queue.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="https://i.imgur.com/kDOKkLp.gif" width="400" height="240" />
