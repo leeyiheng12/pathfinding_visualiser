@@ -331,6 +331,7 @@ export function * fillDeadEnds(allNodes) {
         for (let i = 0; i < numRows; i++) {
             for (let j = 0; j < numCols; j++) {
                 allNodesCopy[i][j].generateNeighbours(allNodesCopy, false);
+                allNodesCopy[i][j].genWallNeighbours(allNodesCopy, false);
             }
         }
         changed = false;
@@ -338,7 +339,9 @@ export function * fillDeadEnds(allNodes) {
         for (let i = 0; i < numRows; i++) {
             for (let j = 0; j < numCols; j++) {
                 const curNode = allNodesCopy[i][j];
-                if (!curNode.isStart && !curNode.isEnd && !curNode.isWall && curNode.neighbours.length === 1) {  // is not a wall, only 1 neighbour
+                if (curNode.isStart || curNode.isEnd) continue;
+                // is not a wall, only 1 neighbour or all neighbours are walls
+                if (!curNode.isWall && (curNode.neighbours.length === 1 || curNode.wallNeighbours.length === curNode.numPossibleNeighbours())) {
                     allNodesCopy[i][j].setWall(true);
                     thisFrame.push(allNodesCopy[i][j]);
                     changed = true;

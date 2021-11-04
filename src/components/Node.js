@@ -119,6 +119,18 @@ class Node {
         this.isPath = false;
     }
 
+    numPossibleNeighbours() {
+        if (this.rowNum === 0 || this.rowNum === this.totalRows - 1) {  // top row or bottom row
+            if (this.colNum === 0 || this.colNum === this.totalCols - 1) {  // left most or right most column
+                return 2;
+            } else return 3;
+        } else {  // not top row or bottom row
+            if (this.colNum === 0 || this.colNum === this.totalCols - 1) {  // left most or right most column
+                return 3;
+            } else return 4;
+        }
+    }
+
     generateNeighbours(allNodes, allowDiagonal) {
         this.neighbours = [];
         const isTop = this.rowNum === 0;
