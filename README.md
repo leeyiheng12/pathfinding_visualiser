@@ -22,7 +22,15 @@ Still a work in progress.
 
 ### Maze Generation Algorithms
 
+#### Legitimate Algorithms
+- Aldous-Broder
+- Backtracking
 - Binary Tree
+- Growing Tree
+- Hunt and Kill
+- Kruskal
+
+#### Others
 - "Random Tree" - Binary Tree but at each stage, 1-3 walls can be removed at random
 - Maze - Cellular Automata, rulestring B3/S12345
 - Mazectric - Cellular Automata, rulestring B3/S1234
