@@ -86,7 +86,7 @@ export function bfs(startNode, endNode, allNodes, heuristicFunction) {
     let displayFrames = [];
     let thisFrameFrontierNodes;
 
-    while (q.size > 0 && !found) {
+    while (q.length() > 0 && !found) {
         const curNode = q.dequeue();
         if (curNode.neighbours === null) continue;
 

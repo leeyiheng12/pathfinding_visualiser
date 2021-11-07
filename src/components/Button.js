@@ -4,8 +4,8 @@ import classes from "./Button.module.css";
 
 const Button = props => {
 
-    const height = props.height ? props.height : "80px";
-    const width = props.width ? props.width : "80px";
+    const height = props.height ? props.height : "6vh";
+    const width = props.width ? props.width : "6vw";
 
     const buttonStyle = {
         "width": width,

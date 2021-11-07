@@ -1,13 +1,10 @@
 .gridClass {
-    /* 31 x 41 */
-    height: 800px;
-    width: 1200px;
+    /* 30 x 60 */
+    height: 80vh;
+    width: 80vw;
     /* border: 1px solid black; */
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(41, 1fr);
-    grid-template-rows: repeat(31, 1fr);
-    column-gap: 3px;
-    row-gap: 3px;
-    margin-top: 10px;
+    column-gap: 2px;
+    row-gap: 2px;
 }

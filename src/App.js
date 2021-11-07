@@ -6,7 +6,8 @@ import Grid from "./components/Grid";
 import Node from "./components/Node";
 import {bfs, bestFirstSearch, aStar} from "./Algorithms/PathfindingAlgorithms";
 import {manhattanDistance, euclideanDistance} from "./Algorithms/PathfindingAlgorithms";
-import {binaryTree, randomTree, CAMaze, CAMazeCetric, fillDeadEnds, CATest} from "./Algorithms/MazeGeneratingAlgorithms";
+import {aldousBroder, backtracking, binaryTree, growingTree, huntAndKill, kruskal,
+  randomTree, CAMaze, CAMazeCetric, fillDeadEnds, CATest} from "./Algorithms/MazeGeneratingAlgorithms";
 
 import Button from "./components/Button";
 import Modal from "./components/Modal";
@@ -14,7 +15,7 @@ import Modal from "./components/Modal";
 
 const ROWS = 31;
 const COLUMNS = 41;
-const SPEED = 10;
+const SPEED = 1;
 
 const allNodesB = [];
 for (let i = 0; i < ROWS; i++) {
@@ -163,6 +164,7 @@ function App() {
   Wall -> Black \n
   To reset a grid square, click on it again.  \n
   You can also left-click and drag to draw walls quickly, or right-click and drag to delete walls quickly. 
+  Hint: Zoom out all the way if you want the grids to look different.
   `;
 
   const genMaze = genFunc => {
@@ -225,14 +227,13 @@ function App() {
       <div className={classes.topDiv}>
        
         <div className={classes.section}>
-          <Button onClick={e => setShowModal(true)} width="100px" value="Instructions"></Button>
+          <Button onClick={e => setShowModal(true)} width="5vw" value="Instructions"></Button>
           <Button onClick={clearAll} value="Clear All" disabled={!enableInput}></Button>
         </div>
 
         <div className={classes.section}>
           {Object.keys(pfNameToFunc).map(name => <Button 
             onClick={() => setAlgo(name)}
-            width="100px"
             value={name} 
             key={name}
             selected={selectedAlgoName===name} />)
@@ -242,8 +243,6 @@ function App() {
         <div className={classes.section}>
           {Object.keys(hfNameToFunc).map(name => <Button 
             onClick={() => setHf(name)}
-            width="120px"
-            height="60px" 
             value={name} 
             key={name}
             selected={selectedHfName===name} />)
@@ -253,8 +252,7 @@ function App() {
         <div className={classes.section}>
           <Button 
             onClick={() => setAllowDiagonal(p=>!p)} 
-            width="120px"
-            height="60px" 
+            width="7vw"
             value="Diagonal Travel"
             selected={allowDiagonal}/>
         </div>
@@ -282,11 +280,16 @@ function App() {
 
       <div className={classes.topDiv}>
         <div className={classes.section}>
+          <Button onClick={e => genMaze(aldousBroder)} value="Aldous-Broder" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(backtracking)} value="Backtracking" disabled={!enableInput}></Button>
           <Button onClick={e => genMaze(binaryTree)} value="Binary Tree" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(growingTree)} value="Growing Tree" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(huntAndKill)} value="Hunt and Kill" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(kruskal)} value="Kruskal" disabled={!enableInput}></Button>
           <Button onClick={e => genMaze(randomTree)} value="Random Tree" disabled={!enableInput}></Button>
-          <Button onClick={e => genMaze(CAMaze)} width="100px" value="Maze (CA)" disabled={!enableInput}></Button>
-          <Button onClick={e => genMaze(CAMazeCetric)} width="100px" value="MazeCetric (CA)" disabled={!enableInput}></Button>
-          <Button onClick={e => genMaze(CATest)} width="100px" value="Another CA" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(CAMaze)} width="5vw" value="Maze (CA)" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(CAMazeCetric)} width="8vw" value="MazeCetric (CA)" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(CATest)} width="6vw" value="Another CA" disabled={!enableInput}></Button>
         </div>
 
         <div className={classes.section}>

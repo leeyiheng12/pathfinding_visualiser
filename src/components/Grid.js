@@ -6,6 +6,11 @@ import NodeDisplay from "./NodeDisplay";
 const Grid = props => {
 
     const allNodes = props.allNodes;
+
+    const gridStyle = {
+        "gridTemplateRows": `repeat(${props.ROWS}, 1fr)`,
+        "gridTemplateColumns": `repeat(${props.COLUMNS}, 1fr)`
+    };
     
     const onDragHandler = (event, rowNum, colNum) => {
         // event.preventDefault();
@@ -47,7 +52,7 @@ const Grid = props => {
     }
 
     return (<>
-        <div className={classes.gridClass}>
+        <div className={classes.gridClass} style={gridStyle}>
             {allNodes.map(row => 
                 row.map(n => <NodeDisplay
                 key={2**n.rowNum * 3**n.colNum} 

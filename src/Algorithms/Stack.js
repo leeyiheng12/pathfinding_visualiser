@@ -1,6 +1,6 @@
 import Node from "./Node";
 
-class Queue {
+class Stack {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -8,12 +8,13 @@ class Queue {
     }
 
     enqueue(n) {
+        const nd = new Node(n);
         if (this.head === null) {
-            this.head = new Node(n);
+            this.head = nd;
             this.tail = this.head;
         } else {
-            this.tail.setNext(new Node(n));
-            this.tail = this.tail.next;
+            nd.setNext(this.head);
+            this.head = nd;
         }
         this.size++;
     }
@@ -30,4 +31,4 @@ class Queue {
     }
 }
 
-export default Queue;
+export default Stack;

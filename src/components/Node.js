@@ -178,6 +178,8 @@ class Node {
             if (!allNodes[this.rowNum][this.colNum+1].isWall)
                 this.neighbours.push(allNodes[this.rowNum][this.colNum+1]);  // node to its right
         }
+
+        return this.neighbours;
     }
 
     genWallNeighbours(allNodes, allowDiagonal) {
@@ -226,6 +228,66 @@ class Node {
         if (!isRight) {
             if (allNodes[this.rowNum][this.colNum+1].isWall)
                 this.wallNeighbours.push(allNodes[this.rowNum][this.colNum+1]);  // node to its right
+        }
+
+        return this.wallNeighbours;
+    }
+
+    genMazeNeighbours(allNodes, allowDiagonal) {
+        this.mazeNeighbours = [];
+        const isTop = this.rowNum === 0 || this.rowNum === 1;
+        const isBottom = this.rowNum === this.totalRows - 2 || this.rowNum === this.totalRows - 1;
+        const isLeft = this.colNum === 0 || this.colNum === 1;
+        const isRight = this.colNum === this.totalCols - 2 || this.colNum === this.totalCols - 1;
+
+        if (!isTop) {
+
+            if (!allNodes[this.rowNum-2][this.colNum].isWall) 
+                this.mazeNeighbours.push(allNodes[this.rowNum-2][this.colNum]);  // node above it
+
+            if (allowDiagonal && !isLeft) {
+                if (!allNodes[this.rowNum-2][this.colNum-2].isWall) 
+                    this.mazeNeighbours.push(allNodes[this.rowNum-2][this.colNum-2]);  // topleft
+            }
+
+            if (allowDiagonal && !isRight) {
+                if (!allNodes[this.rowNum-2][this.colNum+2].isWall) 
+                    this.mazeNeighbours.push(allNodes[this.rowNum-2][this.colNum+2]);  // topright
+            }
+        }
+
+        if (!isBottom) {
+            if (!allNodes[this.rowNum+2][this.colNum].isWall)
+                this.mazeNeighbours.push(allNodes[this.rowNum+2][this.colNum]);  // node below it
+
+            if (allowDiagonal && !isLeft) {
+                if (!allNodes[this.rowNum+2][this.colNum-2].isWall)
+                this.mazeNeighbours.push(allNodes[this.rowNum+2][this.colNum-2]);  // bottomleft
+            }
+
+            if (allowDiagonal && !isRight) {
+                if (!allNodes[this.rowNum+2][this.colNum+2].isWall)
+                this.mazeNeighbours.push(allNodes[this.rowNum+2][this.colNum+2]);  // bottomright
+            }
+        }
+
+        if (!isLeft) {
+            if (!allNodes[this.rowNum][this.colNum-2].isWall)
+                this.mazeNeighbours.push(allNodes[this.rowNum][this.colNum-2]);  // node to its left
+        }
+
+        if (!isRight) {
+            if (!allNodes[this.rowNum][this.colNum+2].isWall)
+                this.mazeNeighbours.push(allNodes[this.rowNum][this.colNum+2]);  // node to its right
+        }
+        return this.mazeNeighbours;
+    }
+
+    nodeBetween(allNodes, node2) {
+        if (this.rowNum === node2.rowNum) {
+            return allNodes[this.rowNum][(this.colNum + node2.colNum)/2];
+        } else {
+            return allNodes[(this.rowNum + node2.rowNum)/2][this.colNum];
         }
     }
 }

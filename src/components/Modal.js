@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 
-import Button from "./Button";
+// import Button from "./Button";
 import classes from "./Modal.module.css";
 
 const Backdrop = props => {
@@ -19,10 +19,13 @@ const ModalOverlay = props => {
                 <p>
                     {props.message.split("\n").map(x => <p>{x}</p>)}
                 </p>
+                <p onClick={e => window.open("https://github.com/leeyiheng12/pathfinding_visualiser")}>
+                    <u>GitHub</u>
+                </p>
             </div>
-            <footer className={classes.actions}>
+            {/* <footer className={classes.actions}>
                 <Button onClick={props.onConfirm}>Ok!</Button>
-            </footer>
+            </footer> */}
         </div>
     );
 };
