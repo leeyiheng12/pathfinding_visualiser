@@ -14,7 +14,7 @@ import Modal from "./components/Modal";
 
 
 const ROWS = 31;
-const COLUMNS = 41;
+const COLUMNS = 61;
 const SPEED = 1;
 
 const allNodesB = [];
