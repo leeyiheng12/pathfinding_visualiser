@@ -4,6 +4,10 @@ Can be used to visualise some pathfinding and maze related algorithms.
 
 <img src="https://imgur.com/TeHGiaJ.gif" width="400" height="240" />
 
+Generate beautiful mazes!
+
+<img src="https://i.imgur.com/HKcZDD6.png" width="400" height="240" />
+
 Or you can draw your own mazes.
 
 Check it out [hereeeeeeeeeeeeeee](https://leeyiheng12.github.io/pathfinding_visualiser/).
