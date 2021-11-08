@@ -242,42 +242,42 @@ class Node {
 
         if (!isTop) {
 
-            if (!allNodes[this.rowNum-2][this.colNum].isWall) 
+            // if (!allNodes[this.rowNum-2][this.colNum].isWall) 
                 this.mazeNeighbours.push(allNodes[this.rowNum-2][this.colNum]);  // node above it
 
             if (allowDiagonal && !isLeft) {
-                if (!allNodes[this.rowNum-2][this.colNum-2].isWall) 
+                // if (!allNodes[this.rowNum-2][this.colNum-2].isWall) 
                     this.mazeNeighbours.push(allNodes[this.rowNum-2][this.colNum-2]);  // topleft
             }
 
             if (allowDiagonal && !isRight) {
-                if (!allNodes[this.rowNum-2][this.colNum+2].isWall) 
+                // if (!allNodes[this.rowNum-2][this.colNum+2].isWall) 
                     this.mazeNeighbours.push(allNodes[this.rowNum-2][this.colNum+2]);  // topright
             }
         }
 
         if (!isBottom) {
-            if (!allNodes[this.rowNum+2][this.colNum].isWall)
+            // if (!allNodes[this.rowNum+2][this.colNum].isWall)
                 this.mazeNeighbours.push(allNodes[this.rowNum+2][this.colNum]);  // node below it
 
             if (allowDiagonal && !isLeft) {
-                if (!allNodes[this.rowNum+2][this.colNum-2].isWall)
+                // if (!allNodes[this.rowNum+2][this.colNum-2].isWall)
                 this.mazeNeighbours.push(allNodes[this.rowNum+2][this.colNum-2]);  // bottomleft
             }
 
             if (allowDiagonal && !isRight) {
-                if (!allNodes[this.rowNum+2][this.colNum+2].isWall)
+                // if (!allNodes[this.rowNum+2][this.colNum+2].isWall)
                 this.mazeNeighbours.push(allNodes[this.rowNum+2][this.colNum+2]);  // bottomright
             }
         }
 
         if (!isLeft) {
-            if (!allNodes[this.rowNum][this.colNum-2].isWall)
+            // if (!allNodes[this.rowNum][this.colNum-2].isWall)
                 this.mazeNeighbours.push(allNodes[this.rowNum][this.colNum-2]);  // node to its left
         }
 
         if (!isRight) {
-            if (!allNodes[this.rowNum][this.colNum+2].isWall)
+            // if (!allNodes[this.rowNum][this.colNum+2].isWall)
                 this.mazeNeighbours.push(allNodes[this.rowNum][this.colNum+2]);  // node to its right
         }
         return this.mazeNeighbours;

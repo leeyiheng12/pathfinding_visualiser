@@ -1,5 +1,6 @@
 import Frame from "./Frame";
 import Stack from "./Stack";
+// import Queue from "./Queue";
 import UnionFind from "./UnionFind";
 
 const MAX_LOAD = 100;
@@ -60,6 +61,24 @@ function * genGrid(allNodes) {  // generates the grid, returning the empty walka
                 allNodesCopy[i][j].genMazeNeighbours(allNodesCopy, false);
                 allWalkable.push(allNodesCopy[i][j]);
             }
+        }
+    }
+    yield new Frame(borders);
+    return allWalkable;
+}
+
+function * genAllWalls(allNodes) {  // generates all walls, returning the empty walkable nodes
+    const borders = [];
+    let allWalkable = [];
+    const allNodesCopy = allNodes.map(i => i.map(n => n.makeCopy()));
+    for (let i = 0; i < allNodesCopy.length; i++) {
+        for (let j = 0; j < allNodesCopy[0].length; j++) {
+            allNodesCopy[i][j].setWall(true);
+            if (i % 2 !== 0 && j % 2 !== 0) {
+                allNodesCopy[i][j].genMazeNeighbours(allNodesCopy, false);
+                allWalkable.push(allNodesCopy[i][j]);
+            }
+            borders.push(allNodesCopy[i][j]);
         }
     }
     yield new Frame(borders);
@@ -172,7 +191,7 @@ export function * growingTree(allNodes) {
 
    // ======================== grids ========================
 
-    const genGridFunc = genGrid(allNodes);
+    const genGridFunc = genAllWalls(allNodes);
     yield genGridFunc.next().value;
     const allWalkable = genGridFunc.next().value;
 
@@ -183,24 +202,33 @@ export function * growingTree(allNodes) {
     let listOfCells = [curNode];
 
     let noNeighbour;
-    let randNeighbour;
+    let randNeighbour, randNeighbourCopy;
     let wall;
+
+    visited[curNode.rowNum][curNode.colNum] = true;
+    curNode.setWall(false);
+    yield new Frame([curNode]);
 
     let filterFuncGen = node => x => x!==node;
 
     while (true) {
         noNeighbour = true;
         curNode = listOfCells[randBetween(0, listOfCells.length)];
-        visited[curNode.rowNum][curNode.colNum] = true;
 
         shuffleArray(curNode.mazeNeighbours);
         for (randNeighbour of curNode.mazeNeighbours) {
             if (!visited[randNeighbour.rowNum][randNeighbour.colNum]) {
 
-                // make wakk
+                visited[randNeighbour.rowNum][randNeighbour.colNum] = true;
+
+                // remove walls, make paths
                 wall = curNode.nodeBetween(allNodes, randNeighbour);
                 wall.setWall(false);
-                yield new Frame([wall]);
+
+                randNeighbourCopy = randNeighbour.makeCopy();
+                randNeighbourCopy.setWall(false);
+
+                yield new Frame([wall.makeCopy(), randNeighbourCopy.makeCopy()]);
 
                 // add to list
                 listOfCells.push(randNeighbour);
@@ -212,7 +240,9 @@ export function * growingTree(allNodes) {
         if (noNeighbour) {  // remove from array
             listOfCells = listOfCells.filter(filterFuncGen(curNode));
         }
-        if (listOfCells.length === 0) break;
+        if (listOfCells.length === 0) {
+            break;
+        }
     }
 }
 
@@ -308,8 +338,8 @@ export function * kruskal(allNodes) {
 
     const allSpaces = new Set();
     for (let i = 0; i < allWalls.length; i++) {
-        allSpaces.add(allWalls[i][1]);
-        allSpaces.add(allWalls[i][2]);
+        allSpaces.add(allWalls[i][1]);  // spaces
+        allSpaces.add(allWalls[i][2]);  // spaces
     }
     const UFDS = new UnionFind(Array.from(allSpaces));
     allWalls = shuffleArray(allWalls);
@@ -323,6 +353,118 @@ export function * kruskal(allNodes) {
             wall.setWall(false);
             yield new Frame([wall]);
         }
+    }
+}
+
+export function * prim(allNodes) {
+
+    const numRows = allNodes.length;
+    const numCols = allNodes[0].length;
+
+   // ======================== grids ========================
+
+    const genGridFunc = genAllWalls(allNodes);
+    yield genGridFunc.next().value;
+    const allWalkable = genGridFunc.next().value;
+
+    // contains a bunch of arrays
+    // each array has 3 nodes: a wall, and the 2 nodes it divides
+    let allWalls = [];  
+    for (let i = 0; i < numRows; i++) {
+        for (let j = 0; j < numCols; j++) {
+            if (i !== 0 && i !== numRows -1) {
+                if (j !== 0 && j !== numCols - 1) {
+                    
+                    if (i % 2 === 1 && j % 2 === 0) {  // its left and right are paths
+                        allWalls.push([allNodes[i][j], allNodes[i][j-1], allNodes[i][j+1]]);
+                    } else if (i % 2 === 0 && j % 2 === 1) {  // its up and down are paths
+                        allWalls.push([allNodes[i][j], allNodes[i-1][j], allNodes[i+1][j]]);
+                    }
+
+                }
+            }
+        }
+    }
+
+    const visited = [];
+    for (let i = 0; i < numRows; i++) visited.push(new Array(numCols).fill(false));
+    
+    const visitedNodes = new Set();
+
+    allWalls = shuffleArray(allWalls);
+    let [wall, space1, space2] = allWalls.pop();
+    space1.setWall(false);
+    visitedNodes.add(space1);
+    yield new Frame([space1]);
+
+    while (visitedNodes.size !== allWalkable.length) {
+        [wall, space1, space2] = allWalls.pop();
+        if (visitedNodes.has(space1) && !visitedNodes.has(space2)) {
+            visitedNodes.add(space2);
+            space2.setWall(false);
+            wall.setWall(false);
+            yield new Frame([wall, space2]);
+        } else if (!visitedNodes.has(space1) && visitedNodes.has(space2)) {
+            visitedNodes.add(space1);
+            space1.setWall(false);
+            wall.setWall(false);
+            yield new Frame([wall, space1]);
+        } else {
+            allWalls.unshift([wall, space1, space2]);
+        }
+    }
+
+  
+
+}
+
+export function * wrongGrowingTree(allNodes) {
+
+    const numRows = allNodes.length;
+    const numCols = allNodes[0].length;
+
+   // ======================== grids ========================
+
+    const genGridFunc = genGrid(allNodes);
+    yield genGridFunc.next().value;
+    const allWalkable = genGridFunc.next().value;
+
+    const visited = [];
+    for (let i = 0; i < numRows; i++) visited.push(new Array(numCols).fill(false));
+
+    let curNode = allWalkable[randBetween(0, allWalkable.length)];
+    let listOfCells = [curNode];
+
+    let noNeighbour;
+    let randNeighbour;
+    let wall;
+
+    let filterFuncGen = node => x => x!==node;
+
+    while (true) {
+        noNeighbour = true;
+        curNode = listOfCells[randBetween(0, listOfCells.length)];
+        visited[curNode.rowNum][curNode.colNum] = true;
+
+        shuffleArray(curNode.mazeNeighbours);
+        for (randNeighbour of curNode.mazeNeighbours) {
+            if (!visited[randNeighbour.rowNum][randNeighbour.colNum]) {
+
+                wall = curNode.nodeBetween(allNodes, randNeighbour);
+                wall.setWall(false);
+                yield new Frame([wall]);
+
+                // add to list
+                listOfCells.push(randNeighbour);
+
+                noNeighbour = false;
+                break;
+            }
+        }
+        if (noNeighbour) {  // remove from array
+            listOfCells = listOfCells.filter(filterFuncGen(curNode));
+        }
+        if (listOfCells.length === 0) break;
     }
 }
 

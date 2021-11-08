@@ -6,7 +6,7 @@ import Grid from "./components/Grid";
 import Node from "./components/Node";
 import {bfs, bestFirstSearch, aStar} from "./Algorithms/PathfindingAlgorithms";
 import {manhattanDistance, euclideanDistance} from "./Algorithms/PathfindingAlgorithms";
-import {aldousBroder, backtracking, binaryTree, growingTree, huntAndKill, kruskal,
+import {aldousBroder, backtracking, binaryTree, growingTree, wrongGrowingTree, huntAndKill, kruskal, prim,
   randomTree, CAMaze, CAMazeCetric, fillDeadEnds, CATest} from "./Algorithms/MazeGeneratingAlgorithms";
 
 import Button from "./components/Button";
@@ -15,6 +15,8 @@ import Modal from "./components/Modal";
 
 const ROWS = 31;
 const COLUMNS = 61;
+// const ROWS = 11;
+// const COLUMNS = 21;
 
 const allNodesB = [];
 for (let i = 0; i < ROWS; i++) {
@@ -280,8 +282,13 @@ function App() {
           <Button onClick={e => genMaze(binaryTree)} value="Binary Tree" disabled={!enableInput}></Button>
           <Button onClick={e => genMaze(growingTree)} value="Growing Tree" disabled={!enableInput}></Button>
           <Button onClick={e => genMaze(huntAndKill)} value="Hunt and Kill" disabled={!enableInput}></Button>
-          <Button onClick={e => genMaze(kruskal)} value="Kruskal" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(kruskal)} width="4vw" value="Kruskal" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(prim)} width="4vw" value="Prim" disabled={!enableInput}></Button>
+        </div>
+
+        <div className={classes.section}>
           <Button onClick={e => genMaze(randomTree)} value="Random Tree" disabled={!enableInput}></Button>
+          <Button onClick={e => genMaze(wrongGrowingTree)} width="7vw" value="Wrong Growing Tree" disabled={!enableInput}></Button>
           <Button onClick={e => genMaze(CAMaze)} width="5vw" value="Maze (CA)" disabled={!enableInput}></Button>
           <Button onClick={e => genMaze(CAMazeCetric)} width="8vw" value="MazeCetric (CA)" disabled={!enableInput}></Button>
           <Button onClick={e => genMaze(CATest)} width="6vw" value="Another CA" disabled={!enableInput}></Button>

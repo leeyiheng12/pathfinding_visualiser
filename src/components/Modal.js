@@ -37,7 +37,6 @@ const ModalOverlay = props => {
                 <p onClick={e => window.open("https://github.com/leeyiheng12/pathfinding_visualiser")}>
                     <u>GitHub</u>
                 </p>
-                <button onClick={e=>alert(props.speed)} />
             </div>
             {/* <footer className={classes.actions}>
                 <Button onClick={props.onConfirm}>Ok!</Button>
