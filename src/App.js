@@ -15,7 +15,6 @@ import Modal from "./components/Modal";
 
 const ROWS = 31;
 const COLUMNS = 61;
-const SPEED = 1;
 
 const allNodesB = [];
 for (let i = 0; i < ROWS; i++) {
@@ -36,6 +35,13 @@ function App() {
   const [allNodes, setAllNodes] = React.useState(allNodesB);
   const [startNode, setStartNode] = React.useState(null);
   const [endNode, setEndNode] = React.useState(null);
+
+  const [speed, setSpeed] = React.useState(10);  
+  // speed = [1, 10]
+  // 10*speed = [10, 100]
+  // 1000 / 10*speed = [100, 10]
+
+  const DURATION = 100/speed;
 
   function updateSingleNode(node) {
     const newAll = allNodes.slice();
@@ -118,7 +124,7 @@ function App() {
       setTimeout(() => {
         updateFrameNodes(searchFrames[i]);
         setEnableInput(false);
-      }, i*SPEED);
+      }, i*DURATION);
     }
 
     if (!pathFrames) pathFrames = [];
@@ -129,12 +135,12 @@ function App() {
         setEnableInput(false); 
         updateFrameNodes(pathFrames[i]);
       }, 
-      (searchFrames.length + i) * SPEED
+      (searchFrames.length + i) * DURATION
       );
     }
     setTimeout(
       () => setEnableInput(true), 
-      SPEED * (searchFrames.length + pathFrames.length)
+      DURATION * (searchFrames.length + pathFrames.length)
     );
   }
 
@@ -157,16 +163,6 @@ function App() {
 
   const [showModal, setShowModal] = React.useState(false);
 
-  const modalMessage = `
-  Click on a grid square to set the start and end points. \n
-  Start -> Green \n
-  End -> Red \n
-  Wall -> Black \n
-  To reset a grid square, click on it again.  \n
-  You can also left-click and drag to draw walls quickly, or right-click and drag to delete walls quickly. 
-  Hint: Zoom out all the way if you want the grids to look different.
-  `;
-
   const genMaze = genFunc => {
     if (!enableInput) return;
     clearWalls();
@@ -180,14 +176,14 @@ function App() {
         setTimeout(() => {
           updateFrameNodes(r.value);
           setEnableInput(false);
-        }, iter * SPEED)
+        }, iter * DURATION)
       )(result, i);
       result = displayFrames.next();
     }
     
     setTimeout(
       () => {setEnableInput(true);}, 
-      SPEED * i
+      DURATION * i
     );
   }
 
@@ -203,26 +199,25 @@ function App() {
         setTimeout(() => {
           updateFrameNodes(r.value);
           setEnableInput(false);
-        }, iter * SPEED)
+        }, iter * DURATION)
       )(result, i);
       result = displayFrames.next();
 
       if (result.done) {
         setTimeout(
           () => {setEnableInput(true);}, 
-          SPEED * i
+          DURATION * i
         );
         return;
       }
     }
-   
-
+  
   }
 
   return (
     <div className={classes.mainDiv}>
 
-      {showModal && <Modal onConfirm={e => setShowModal(false)} title="Instructions" message={modalMessage} />}
+      {showModal && <Modal onConfirm={e => setShowModal(false)} title="Instructions" speed={speed} setSpeed={setSpeed} />}
 
       <div className={classes.topDiv}>
        
