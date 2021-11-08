@@ -2,7 +2,7 @@
 
 Can be used to visualise some pathfinding and maze related algorithms.
 
-<img src="https://i.imgur.com/fx5WZcS.gif" width="400" height="240" />
+<img src="https://imgur.com/TeHGiaJ.gif" width="400" height="240" />
 
 Or you can draw your own mazes.
 
