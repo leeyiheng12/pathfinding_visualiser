@@ -5,6 +5,6 @@
     /* border: 1px solid black; */
     margin: auto;
     display: grid;
-    column-gap: 2px;
-    row-gap: 2px;
+    /* column-gap: 2px;
+    row-gap: 2px; */
 }

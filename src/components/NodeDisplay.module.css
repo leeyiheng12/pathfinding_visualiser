@@ -1,8 +1,8 @@
 .nodeClass {
     /* width: 20px;
     height: 20px; */
-    /* border: 1px solid black; */
-    box-shadow: 5px 5px black;
+    border: 1px solid black;
+    box-shadow: 3px 3px black;
     opacity: 0.8;
 }
 

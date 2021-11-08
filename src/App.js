@@ -13,10 +13,19 @@ import Button from "./components/Button";
 import Modal from "./components/Modal";
 
 
-const ROWS = 31;
-const COLUMNS = 61;
+
+// function deepCopy(allNodes) {
+//   return allNodes.map(i => i.map(n => n.makeCopy()));
+// }
+
+// const ROWS = 31;
+// const COLUMNS = 61;
+
 // const ROWS = 11;
 // const COLUMNS = 21;
+
+const ROWS = 91;
+const COLUMNS = 141;
 
 const allNodesB = [];
 for (let i = 0; i < ROWS; i++) {
@@ -26,10 +35,6 @@ for (let i = 0; i < ROWS; i++) {
     }
     allNodesB.push(newRow);
 }
-
-// function deepCopy(allNodes) {
-//   return allNodes.map(i => i.map(n => n.makeCopy()));
-// }
 
 function App() {
 
@@ -219,7 +224,11 @@ function App() {
   return (
     <div className={classes.mainDiv}>
 
-      {showModal && <Modal onConfirm={e => setShowModal(false)} title="Instructions" speed={speed} setSpeed={setSpeed} />}
+      {showModal && <Modal 
+        onConfirm={e => setShowModal(false)} 
+        title="Instructions" 
+        speed={speed} 
+        setSpeed={setSpeed} />}
 
       <div className={classes.topDiv}>
        

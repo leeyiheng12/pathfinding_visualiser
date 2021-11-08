@@ -33,7 +33,7 @@ const ModalOverlay = props => {
             <div className={classes.content}>
                 {message.split("\n").map(x => <p key={Math.random()}>{x}</p>)}
                 <p>Speed</p>
-                <input type="range" min="1" max="10" value={props.speed} onInput={sliderHandler} />
+                <input className={classes.slider} type="range" min="1" max="10" value={props.speed} onInput={sliderHandler} />
                 <p onClick={e => window.open("https://github.com/leeyiheng12/pathfinding_visualiser")}>
                     <u>GitHub</u>
                 </p>
