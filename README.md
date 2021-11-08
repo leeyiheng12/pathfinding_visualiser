@@ -29,9 +29,11 @@ Still a work in progress.
 - Growing Tree
 - Hunt and Kill
 - Kruskal
+- Prim
 
 #### Others
-- "Random Tree" - Binary Tree but at each stage, 1-3 walls can be removed at random
+- Random Tree - Binary Tree but at each stage, 1-3 walls can be removed at random
+- Wrong Growing Tree - implemented Growing Tree wrongly but still produces something
 - Maze - Cellular Automata, rulestring B3/S12345
 - Mazectric - Cellular Automata, rulestring B3/S1234
 - "Another CA" - was experimenting, this would be rulestring B1/S123?
