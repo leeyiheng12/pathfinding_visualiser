@@ -18,14 +18,14 @@ import Modal from "./components/Modal";
 //   return allNodes.map(i => i.map(n => n.makeCopy()));
 // }
 
-// const ROWS = 31;
-// const COLUMNS = 61;
+const ROWS = 31;
+const COLUMNS = 61;
 
 // const ROWS = 11;
 // const COLUMNS = 21;
 
-const ROWS = 91;
-const COLUMNS = 141;
+// const ROWS = 91;
+// const COLUMNS = 141;
 
 const allNodesB = [];
 for (let i = 0; i < ROWS; i++) {
